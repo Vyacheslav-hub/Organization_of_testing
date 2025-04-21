@@ -1,49 +1,53 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// eslint-disable-next-line import/no-unresolved,import/no-extraneous-dependencies
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.js',
   output: {
-    filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
-    publicPath: '/goblins-game/',
-  },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'), // уточняем путь к директории
-    },
-    open: true,
-    hot: true, // включаем горячую замену модулей
+    filename: 'bundle.js',
+    assetModuleFilename: 'img/[name][ext]',
+    publicPath: '',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
         exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpg|gif)$/i,
-        type: 'asset/resource', // обработка изображений
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        type: 'asset/resource',
       },
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html', // используем шаблон index.html из папки src
-      filename: 'index.html', // имя выходного файла
-      inject: 'body', // инжектит скрипты в тело страницы
+      template: './src/index.html',
+      filename: 'index.html',
     }),
-    new MiniCssExtractPlugin({
-      filename: 'style.css',
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/licenses.txt', to: '' },
+      ],
     }),
   ],
-  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development', // режим разработки или production
-  devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map', // для дебага в production
+  devServer: {
+    static: path.resolve(__dirname, 'dist'),
+    port: 9000,
+    open: true,
+  },
 };

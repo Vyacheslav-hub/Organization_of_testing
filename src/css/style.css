@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 40px;
+    background: #f4f4f4;
+    text-align: center;
+}
+
+.widget {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card-icons {
+    margin-bottom: 20px;
+}
+
+.card-icon {
+    width: 50px;
+    margin: 0 5px;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+}
+
+.card-icon.active {
+    opacity: 1;
+}
+
+.card-input {
+    padding: 10px;
+    width: 220px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 20px;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+}
