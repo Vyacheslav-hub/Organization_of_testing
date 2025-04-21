@@ -1,4 +1,5 @@
-export default function getCardSystem(number) {
+// eslint-disable-next-line import/prefer-default-export
+export function getCardSystem(number) {
   if (/^4/.test(number)) {
     return 'visa';
   }

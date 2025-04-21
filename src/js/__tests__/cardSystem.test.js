@@ -1,4 +1,4 @@
-import getCardSystem from '../cardSystem';
+import { getCardSystem } from '../cardSystem';
 
 describe('Определение платёжной системы', () => {
   test('Visa', () => {

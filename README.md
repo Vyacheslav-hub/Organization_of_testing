@@ -1,1 +1,0 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/github/Vyacheslav-hub/Organization_of_testing?branch=main&svg=true)](https://ci.appveyor.com/project/Vyacheslav-hub/Organization_of_testing)
